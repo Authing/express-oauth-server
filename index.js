@@ -150,7 +150,9 @@ var handleResponse = function(req, res, response) {
 var handleError = function(e, req, res, response, next) {
 
   if (this.useErrorHandler === true) {
-    req.locals.oauth = { error: e}
+    req.locals = {
+      oauth: { error: e }
+    }
     next();
   } else {
     if (response) {
