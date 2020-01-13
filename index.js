@@ -51,7 +51,9 @@ ExpressOAuthServer.prototype.authenticate = function(options) {
       })
       .tap(function(token) {
         res.locals.oauth = { token: token };
-        next();
+        if (this.continueMiddleware) {
+          next();
+        }
       })
       .catch(function(e) {
         return handleError.call(this, e, req, res, null, next);
